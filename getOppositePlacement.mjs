@@ -24,20 +24,16 @@ export const oppositeAlignments = {
  */
 export const getOppositePlacement = placement => {
 	if (placement?.indexOf) {
+		const oppositePlacement = oppositeSides[placement] || oppositeAlignments[placement];
+		if (oppositePlacement) {
+			return oppositePlacement;
+		}
 		const [side, alignment] = splitAtFirst(placement, '-');
 		if (side) {
 			const oppositeSide = oppositeSides[side];
 			if (alignment) {
 				if (oppositeSide && oppositeAlignments[alignment]) {
 					return `${oppositeSide}-${alignment}`;
-				}
-			} else if (side === placement) {
-				if (oppositeSide) {
-					return oppositeSide;
-				}
-				const oppositeAlignmentOnly = oppositeAlignments[side];
-				if (oppositeAlignmentOnly) {
-					return oppositeAlignmentOnly;
 				}
 			}
 		}
