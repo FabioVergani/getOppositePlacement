@@ -118,15 +118,22 @@ describe('getOppositePlacement', () => {
 				])(titler, tester);
 			});
 		});
-		describe('throws error', () => {
-			test('when input is truthy but not a string', () => {
-				try {
-					// noinspection JSCheckFunctionSignatures
-					getOppositePlacement({ indexOf: true });
-				} catch (error) {
-					expect(error).toBeInstanceOf(Error);
-					expect(error.message.endsWith('.indexOf is not a function')).toBe(true);
-				}
+		describe('throw error', () => {
+			describe('input has "indexOf"" but is not a string', () => {
+				test.each([
+					{ indexOf: true },
+					[],
+					//,...
+				])('%s', input => {
+					expect(input.indexOf).toBeTruthy();
+					try {
+						// noinspection JSCheckFunctionSignatures
+						getOppositePlacement(input);
+					} catch (exception) {
+						expect(exception).toBeInstanceOf(Error);
+						expect(exception.message.endsWith('.indexOf is not a function')).toBe(true);
+					}
+				});
 			});
 		});
 	});
