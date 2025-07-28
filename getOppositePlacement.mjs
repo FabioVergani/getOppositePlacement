@@ -39,5 +39,4 @@ export const getOppositePlacement = placement => {
 		}
 	}
 	console.warn('invalid:%o', { placement });
-	return undefined;
 };
